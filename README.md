@@ -1,10 +1,11 @@
 # Telescope Queue Simulation
 
 This project simulates a night of observations at Gemini South, comparing two scheduling strategies:
-- A **baseline**, conditions-based queue
+- A **baseline**, conditions-based queue  
 - A **forecast-aware**, signal-to-noise-optimized queue
 
 ## Features
+
 This simulation models a single night of telescope observing time at Gemini South, minute by minute, under variable seeing conditions. It compares two queue scheduling strategies:
 
 1. **Baseline Strategy (Conditions-Based)**
@@ -28,34 +29,40 @@ The simulation outputs:
 - A plot comparing true seeing, forecast seeing, forecast uncertainty, and executed observation windows.
 
 ## Forecast Model
+
 Forecasts in the simulation incorporate uncertainty that increases exponentially with time. The standard deviation σ used to perturb future seeing values is calculated as:
+
+```
 σ(t) = max_uncertainty × exp(t / t_max − 1)
+```
 
 Where:
-- `t` is the number of minutes ahead
-- `t_max` is the maximum forecast horizon (default: 30 minutes)
+- `t` is the number of minutes ahead  
+- `t_max` is the maximum forecast horizon (default: 30 minutes)  
 - `max_uncertainty` is the maximum standard deviation applied (default: 0.2 arcsec)
 
 This models increasing uncertainty the further ahead the telescope tries to predict seeing conditions.
 
 ## File Overview
-- `core.py`: Defines the main classes for observing programs and nightly simulation
-- `utils.py`: Utility functions (e.g., seeing generation, forecast uncertainty)
-- `config.py`: Global constants and seeing bin definitions
-- `plotting.py`: Code for visualizing forecasts and execution decisions
+
+- `core.py`: Defines the main classes for observing programs and nightly simulation  
+- `utils.py`: Utility functions (e.g., seeing generation, forecast uncertainty)  
+- `config.py`: Global constants and seeing bin definitions  
+- `plotting.py`: Code for visualizing forecasts and execution decisions  
 - `runsimulation.py`: Command-line script that runs both queue strategies and invokes plotting
 
 ## How to Run
 
 1. Make sure you have Python 3 and the required packages installed:
 
-```bash
-pip install numpy matplotlib
+   ```bash
+   pip install numpy matplotlib
+   ```
 
-2.	Then run the main simulation:
-python runsimulation.py
+2. Then run the main simulation:
+
+   ```bash
+   python runsimulation.py
+   ```
 
 This will simulate both strategies over the same night and generate a plot comparing actual vs. forecast seeing conditions, as well as program execution outcomes.
-
-
-# telescope-queue-sim
